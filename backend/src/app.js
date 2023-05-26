@@ -11,4 +11,16 @@ app.get('/products', (req, res) => {
   res.sendStatus(200);
 });
 
+app.get('/products/:id', (req, res) => {
+  res.sendStatus(200);
+});
+
+app.get('/sales', (req, res) => {
+  res.sendStatus(200);
+});
+
+app.get('/sales/:id', (req, res) => {
+  res.sendStatus(200);
+});
+
 module.exports = app;
