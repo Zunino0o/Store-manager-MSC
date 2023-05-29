@@ -1,10 +1,11 @@
-// const camelize = require('camelize');
-const connection = require('./connection');
+const camelize = require('camelize');
+const { connection } = require('./connection');
 
 const findAll = async () => {
   const [result] = await connection.execute(
     'SELECT * FROM products ORDER BY id',
   );
+  console.log(result);
   return result;
 };
 
@@ -13,8 +14,7 @@ const findById = async (productId) => {
     'SELECT * FROM products WHERE id = ?',
     [productId],
   );
-//   return camelize(product);
-  return product;
+  return camelize(product);
 };
 
 module.exports = {
