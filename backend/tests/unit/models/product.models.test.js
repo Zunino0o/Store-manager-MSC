@@ -32,16 +32,6 @@ describe('Teste em /products', function () {
     });
   });
 
-//   describe('POST "/"', function () {
-//     it('Returns the insertId on the products table', async function () {
-//       sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
-
-//       const result = await productsModel.insert({ name: 'Axe"s Axe' }); 
-
-//       expect(result).to.be.equal(1);
-//     });
-//   });
-
   afterEach(function () {
     sinon.restore();
   });
