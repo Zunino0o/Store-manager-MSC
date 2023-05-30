@@ -10,11 +10,18 @@ const findAll = async () => {
 };
 
 const findById = async (saleId) => {
-  const [[sale]] = await connection.execute(
-    'SELECT * FROM sales_products WHERE id = ?',
+  const [sale] = await connection.execute(
+    // 'SELECT b.date, a.product_id, a.quantity FROM sales b '
+    //   + 'INNER JOIN sales_products a ON a.sale_id = b.id WHERE b.id = ?',
+    'SELECT b.date, a.product_id, a.quantity '
+      + 'FROM StoreManager.sales b '
+      + 'JOIN StoreManager.sales_products a ON a.sale_id = b.id ' 
+      + 'WHERE a.sale_id = ? '
+      + 'ORDER BY b.id, a.product_id ASC',
     [saleId],
   );
-  return camelize(sale);
+  console.log(sale, 'model');
+  return camelize(sale) || null;
 };
 
 module.exports = {

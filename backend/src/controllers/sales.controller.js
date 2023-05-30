@@ -13,6 +13,7 @@ const findById = async (req, res) => {
     if (type) {
       return res.status(type).json({ message });
     }
+    // console.log(message, 'controller');
     return res.status(HTTP_STATUS_OK).json(message);
   };
 
