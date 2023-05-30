@@ -8,11 +8,11 @@ const {
     invalidIdError,
  } = require('./mocks/product.mocks');
 
-describe('Teste em /products', function () {
+describe('SERVICES: Teste em /products', function () {
     it('Listagem de produtos', async function () {
         sinon.stub(productModel, 'findAll').resolves(productList.message);
         
-        const result = await productService.getAll();
+        const result = await productService.findAll();
         
         expect(result).to.deep.equal(productList);
       });
@@ -23,7 +23,7 @@ describe('Teste em /products', function () {
         
         expect(result).to.deep.equal(productById);
       });
-      it('Retorna um eroo caso o ID seja invalido', async function () {
+      it('Retorna um erro caso o ID seja invalido', async function () {
         sinon.stub(productModel, 'findById').resolves(undefined);
         
         const result = await productService.findById(999);
