@@ -32,6 +32,17 @@ describe('MODEL: Teste em /products', function () {
     });
   });
 
+  describe('POST "/products"', function () {
+    it('Retorna um objeto contendo as infos corretas', async function () {
+      sinon.stub(connection, 'execute').resolves([{ insertId: 1 }]);
+      
+      const result = await productModel.insert('teste');
+
+      expect(result).to.be.an('object');
+      expect(result).to.have.all.keys('id', 'name');
+    });
+  });
+
   afterEach(function () {
     sinon.restore();
   });
