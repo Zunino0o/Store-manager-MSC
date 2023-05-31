@@ -29,11 +29,12 @@ const insert = async (req, res) => {
 
 const updateById = async (req, res) => {
   const { name } = req.body;
-  const { type, message } = await productService.updateById(name);
+  const { id } = req.params;
+  const { type, message } = await productService.updateById(name, id);
   if (type) {
     return res.status(type).json({ message });
   }
-  res.status(HTTP_STATUS_INSERT).json(message);
+  res.status(HTTP_STATUS_OK).json(message);
 };
 
 const deleteById = async (req, res) => {

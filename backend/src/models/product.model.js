@@ -26,21 +26,15 @@ const insert = async (name) => {
   return { id: insertId, name };
 };
 
-const updateById = async (name) => {
-  const [{ insertId }] = await connection.execute(
-    'INSERT INTO products (name) VALUES (?)',
-    [name],
+const updateById = async (name, id) => {
+  await connection.execute(
+    'UPDATE products SET name = ? WHERE id = ?',
+    [name, id],
   );
-  return { id: insertId, name };
+  return { id: Number(id), name };
 };
 
-const deleteById = async (name) => {
-  const [{ insertId }] = await connection.execute(
-    'INSERT INTO products (name) VALUES (?)',
-    [name],
-  );
-  return { id: insertId, name };
-};
+const deleteById = async (name) => ({ name });
 
 module.exports = {
   findAll,

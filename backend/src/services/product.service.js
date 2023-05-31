@@ -13,7 +13,9 @@ const findAll = async () => {
 
 const findById = async (id) => {
   const result = await productModel.findById(id);
-  if (!result) return { type: HTTP_STATUS_NOT_FOUND, message: 'Product not found' };
+  if (!result) {
+    return { type: HTTP_STATUS_NOT_FOUND, message: 'Product not found' };
+  }
   return { type: null, message: result };
 };
 
@@ -22,13 +24,16 @@ const insert = async (name) => {
   return { type: null, message: result };
 };
 
-const updateById = async (name) => {
-  const result = await productModel.insert(name);
+const updateById = async (name, id) => {
+  const validateId = await findById(id);
+  if (validateId.type) return validateId;
+  
+  const result = await productModel.updateById(name, id);
   return { type: null, message: result };
 };
 
-const deleteById = async (name) => {
-  const result = await productModel.insert(name);
+const deleteById = async (name, id) => {
+  const result = await productModel.insert(name, id);
   return { type: null, message: result };
 };
 
