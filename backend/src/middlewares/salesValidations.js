@@ -5,6 +5,7 @@ const HTTP_STATUS_BAD_PARAM = 422;
 const NATURAL_NUM_MESSAGE_BAD_REQ = '"quantity" must be greater than or equal to 1';
 
 const verifyProductId = (sales) => {
+    // console.log(sales);
   const checkIds = sales.map((sale) => sale.productId);
   if (checkIds.includes(undefined)) { 
     return { status: HTTP_STATUS_BAD_REQ, message: PRODUCTID_BAD_REQ }; 
