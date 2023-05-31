@@ -1,18 +1,13 @@
 const HTTP_STATUS_BAD_REQ = 400;
 const HTTP_STATUS_BAD_PARAM = 422;
 
-const nameValidation = (req, res, next) => {
+const productMiddleware = (req, res, next) => {
   const { name } = req.body;
-  if (!name || name.length === 0) {
+  if (!name) {
     return res
       .status(HTTP_STATUS_BAD_REQ)
       .json({ message: '"name" is required' });
   }
-  return next();
-};
-
-const nameLengthValidation = (req, res, next) => {
-  const { name } = req.body;
   if (name.length < 5) {
     return res.status(HTTP_STATUS_BAD_PARAM).json({
       message: '"name" length must be at least 5 characters long',
@@ -22,6 +17,5 @@ const nameLengthValidation = (req, res, next) => {
 };
 
 module.exports = {
-  nameLengthValidation,
-  nameValidation,
+  productMiddleware,
 };

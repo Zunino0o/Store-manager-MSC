@@ -14,8 +14,12 @@ const findById = async (id) => {
 };
 
 const insert = async (sales) => {
-    const result = await salesModel.insert(sales);
-    return { type: null, message: result };
+    try {
+        const result = await salesModel.insert(sales);
+        return { type: null, message: result };
+    } catch (error) {
+       return { type: 404, message: 'Product not found' };
+    }
 };
 
 module.exports = {
