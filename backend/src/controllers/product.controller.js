@@ -27,8 +27,28 @@ const insert = async (req, res) => {
   res.status(HTTP_STATUS_INSERT).json(message);
 };
 
+const updateById = async (req, res) => {
+  const { name } = req.body;
+  const { type, message } = await productService.updateById(name);
+  if (type) {
+    return res.status(type).json({ message });
+  }
+  res.status(HTTP_STATUS_INSERT).json(message);
+};
+
+const deleteById = async (req, res) => {
+  const { name } = req.body;
+  const { type, message } = await productService.deleteById(name);
+  if (type) {
+    return res.status(type).json({ message });
+  }
+  res.status(HTTP_STATUS_INSERT).json(message);
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
+  updateById,
+  deleteById,
 };

@@ -18,18 +18,16 @@ const findById = async (id) => {
 };
 
 const insert = async (name) => {
-//   if (!name || name.length === 0) {
-//  return { 
-//     type: HTTP_STATUS_BAD_REQ, 
-//     message: '"name" is required', 
-//   }; 
-// }
-//   if (name.length < 5) {
-//  return { 
-//     type: HTTP_STATUS_BAD_PARAM, 
-//     message: '"name" length must be at least 5 characters long', 
-//   }; 
-// }
+  const result = await productModel.insert(name);
+  return { type: null, message: result };
+};
+
+const updateById = async (name) => {
+  const result = await productModel.insert(name);
+  return { type: null, message: result };
+};
+
+const deleteById = async (name) => {
   const result = await productModel.insert(name);
   return { type: null, message: result };
 };
@@ -38,4 +36,6 @@ module.exports = {
   findAll,
   findById,
   insert,
+  updateById,
+  deleteById,
 };

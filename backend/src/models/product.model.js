@@ -26,8 +26,26 @@ const insert = async (name) => {
   return { id: insertId, name };
 };
 
+const updateById = async (name) => {
+  const [{ insertId }] = await connection.execute(
+    'INSERT INTO products (name) VALUES (?)',
+    [name],
+  );
+  return { id: insertId, name };
+};
+
+const deleteById = async (name) => {
+  const [{ insertId }] = await connection.execute(
+    'INSERT INTO products (name) VALUES (?)',
+    [name],
+  );
+  return { id: insertId, name };
+};
+
 module.exports = {
   findAll,
   findById,
   insert,
+  updateById,
+  deleteById,
 };
