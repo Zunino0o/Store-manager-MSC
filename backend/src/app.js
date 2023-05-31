@@ -1,5 +1,4 @@
 const express = require('express');
-// const { productModel } = require('./models');
 const productsRouter = require('./routes/productsRouter');
 const salesRouter = require('./routes/salesRouter');
 
@@ -14,23 +13,5 @@ app.get('/', (_request, response) => {
 
 app.use('/products', productsRouter);
 app.use('/sales', salesRouter);
-// app.get('/products', async (_req, res) => {
-//   const response = await productModel.findAll();
-//   res.status(200).json(response);
-// });
-
-// app.get('/products/:id', async (req, res) => {
-//   const { id } = req.params;
-//   const response = await productModel.findById(id);
-//   res.status(200).json(response);
-// });
-
-// app.get('/sales', (req, res) => {
-//   res.sendStatus(200);
-// });
-
-// app.get('/sales/:id', (req, res) => {
-//   res.sendStatus(200);
-// });
 
 module.exports = app;
