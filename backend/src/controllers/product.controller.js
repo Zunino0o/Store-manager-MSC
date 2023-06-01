@@ -2,6 +2,7 @@ const { productService } = require('../services');
 
 const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_INSERT = 201;
+const HTTP_STATUS_DELETE = 204;
 
 const findAll = async (_req, res) => {
   const { message } = await productService.findAll();
@@ -38,12 +39,12 @@ const updateById = async (req, res) => {
 };
 
 const deleteById = async (req, res) => {
-  const { name } = req.body;
-  const { type, message } = await productService.deleteById(name);
+  const { id } = req.params;
+  const { type, message } = await productService.deleteById(id);
   if (type) {
     return res.status(type).json({ message });
   }
-  res.status(HTTP_STATUS_INSERT).json(message);
+  res.sendStatus(HTTP_STATUS_DELETE);
 };
 
 module.exports = {

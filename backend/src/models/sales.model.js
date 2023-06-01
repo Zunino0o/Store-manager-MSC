@@ -20,7 +20,7 @@ const findById = async (saleId) => {
       + 'ORDER BY b.id, a.product_id ASC',
     [saleId],
   );
-  console.log(sale, 'model');
+  // console.log(sale, 'model');
   return camelize(sale) || null;
 };
 

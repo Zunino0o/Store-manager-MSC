@@ -9,7 +9,7 @@ const findAll = async () => {
 const findById = async (id) => {
     const result = await salesModel.findById(id);
     // console.log(result, 'service');
-    if (result.length === 0) return { type: 404, message: 'Sale not found' };
+    if (!result || result.length === 0) return { type: 404, message: 'Sale not found' };
     return { type: null, message: result };
 };
 

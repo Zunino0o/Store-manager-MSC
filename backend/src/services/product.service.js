@@ -32,9 +32,12 @@ const updateById = async (name, id) => {
   return { type: null, message: result };
 };
 
-const deleteById = async (name, id) => {
-  const result = await productModel.insert(name, id);
-  return { type: null, message: result };
+const deleteById = async (id) => {
+  const validateId = await findById(id);
+  if (validateId.type) return validateId;
+
+  await productModel.deleteById(id);
+  return { type: null };
 };
 
 module.exports = {

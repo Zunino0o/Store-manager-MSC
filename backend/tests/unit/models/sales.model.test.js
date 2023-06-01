@@ -1,38 +1,41 @@
-// const { expect } = require('chai');
-// const sinon = require('sinon');
-// const { salesModel } = require('../../../src/models');
-// const { connection } = require('../../../src/models/connection');
-// const { productList, validId } = require('./mocks/product.mocks');
+const { expect } = require('chai');
+const sinon = require('sinon');
+const { connection } = require('../../../src/models/connection');
+const { salesList, validId } = require('./mocks/sales.mock');
+const { salesModel } = require('../../../src/models');
 
-// describe('MODEL: Teste em /products', function () {
-//   describe('Listagem de produtos', function () {
-//     it('Retorna a lista com todo os produtos GET /products', async function () {
-//       sinon.stub(connection, 'execute').resolves([productList]);
+describe('MODEL: Teste em /sales', function () {
+  it('Retorna a lista de todas as vendas (GET /)', async function () {
+    sinon.stub(connection, 'execute').resolves([salesList]);
 
-//       const result = await salesModel.findAll();
+    const result = await salesModel.findAll();
+    // console.log('🚀 ~ file: sales.model.test.js:12 ~ result:', result);
 
-//       expect(result).to.deep.equal(productList);
-//     }); 
-//   });
+    expect(result).to.deep.equal(salesList);
+  });
 
-//   describe('GET "/:id"', function () {
-//     it('Retorna o objeto correspondente ao id passado via parametro', async function () {
-//       sinon.stub(connection, 'execute').resolves([[productList[0]]]);
+  it('Retorna venda cujo id corresponde ao passado via parametro (GET /:id)', async function () {
+    sinon.stub(connection, 'execute').resolves([salesList[0]]);
 
-//       const result = await salesModel.findById(validId);
+    const result = await salesModel.findById(validId);
+    // console.log('🚀 ~ file: sales.model.test.js:21 ~ result:', result);
 
-//       expect(result).to.deep.equal(productList[0]);
-//     });
-//     it('Retorna undefined caso nao ache o produto correspondente ao id', async function () {
-//       sinon.stub(connection, 'execute').resolves([[undefined]]);
+    expect(result).to.deep.equal(salesList[0]);
+  });
 
-//       const result = await salesModel.findById(validId);
+  it('Retorna null caso nao ache a sale correspondente ao id (GET /:id)', async function () {
+    sinon.stub(connection, 'execute').resolves([null]);
 
-//       expect(result).to.deep.equal(undefined);
-//     });
-//   });
+    const result = await salesModel.findById(99999);
+    // console.log('🚀 ~ file: sales.model.test.js:31 ~ result:', result);
 
-//   afterEach(function () {
-//     sinon.restore();
-//   });
-// });
+    expect(result).to.deep.equal(null);
+  });
+
+  // TESTE NA FUNCAO salesModel.insert();
+  // it('Retorna um objeto contendo id e a venda inserida (POST /)', function () {})
+
+  afterEach(function () {
+    sinon.restore();
+  });
+});
